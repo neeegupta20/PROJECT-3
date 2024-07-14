@@ -4,10 +4,10 @@ This is a full-stack web application built using the MERN (MongoDB, Express.js, 
 
 ## Features
 
-- User authentication and authorization
-- Create, read, update, and delete accommodations
-- Book accommodations
-- View booking details
+- User authentication and authorization using JWT
+- Create, Book and Update accommodations.
+- View Bookings and your created Accommodations. 
+- Upload Images from your device while creating Accommodations.
 
 ## Tech Stack
 
@@ -15,3 +15,6 @@ This is a full-stack web application built using the MERN (MongoDB, Express.js, 
 - **Backend**: Node.js, Express.js, JWT for authentication
 - **Database**: MongoDB, Mongoose
 - **Other Tools**: Git
+
+  ## Author
+  -Neel Gupta
