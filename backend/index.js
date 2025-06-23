@@ -11,6 +11,7 @@ const multer=require('multer')
 const fs=require('fs');
 const Booking=require('./models/booking.js');
 
+ 
 const bcryptSalt=bcrypt.genSaltSync(8)
 const jwtSecret='1234567890'
 
