@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect("YOUR MONGOOSE CONNECTION URL STRING");
+mongoose.connect("mongodb+srv://wastenap:p%40ssw0rd%279%27%21@cluster0.gaehxqy.mongodb.net/test");
 
 const UserSchema=mongoose.Schema({
     name:String,
