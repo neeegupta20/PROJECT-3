@@ -14,13 +14,6 @@ return(
                     NamasteNest
                 </span>
             </Link>
-            <div className='flex gap-2 border border-gray-300 rounded-lg py-2 px-4 shadow-lg shadow-primary'>
-                <div>Reserve</div>
-                <div className='border-l border-gray-300'></div>
-                <div>Pay</div>
-                <div className='border-l border-gray-300'></div>
-                <div>Stay</div>
-            </div>
             <Link to={user?'/your-account':'/login'} className='flex gap-2 border border-gray-300 rounded-full py-2 px-4 shadow-md shadow-primary'>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
