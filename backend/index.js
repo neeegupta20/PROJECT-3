@@ -158,6 +158,20 @@ app.get('/hostname/:id',async(req,res)=>{
 app.post('/book',async(req,res)=>{
     const {token}=req.cookies;
     const {place,bookerName,bookerNumber,checkin,checkout,guest,price}=req.body;
+
+    const existingBooking = await Booking.findOne({
+        place,
+        $or: [
+            { checkin: { $lt: checkout }, checkout: { $gt: checkin } }
+        ]
+    });
+
+    if (existingBooking) {
+        return res.status(409).json({ 
+            message: "This property is booked for the wanted dates." 
+        });
+    }
+
     jwt.verify(token,'1234567890',async (err,tokenData)=>{
         if(err) throw(err);
         const BookingData=await Booking.create({

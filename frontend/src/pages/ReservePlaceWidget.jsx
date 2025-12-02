@@ -11,19 +11,37 @@ export default function ReservePlaceWidget({place}){
     const [bookerName,SetBookerName]=useState('')
     const [bookerNumber,SetBookerNumber]=useState('')
     const [redirect,SetRedirect]=useState(false);
+    const [dateNA,setDateNA]=useState(false);
+    const [error,setError]=useState(false);
 
     let numberOfNights=0;
     if(checkin && checkout){
         numberOfNights=differenceInCalendarDays(new Date(checkout),new Date(checkin))
     }
 
-    async function MakeBooking(){
-        const data={checkin,checkout,bookerName,bookerNumber,guest,
-            place:place._id,
-            price:numberOfNights*place.price}
-        await axios.post('http://localhost:3000/book',data,{withCredentials:true})
-        SetRedirect(true);
+    async function MakeBooking() {
+        try {
+            if(!bookerName && !bookerNumber){
+                setError(true);
+                return;
+            }
+            const data = {
+                checkin, checkout, bookerName, bookerNumber, guest,
+                place: place._id,
+                price: numberOfNights * place.price
+            };
+            await axios.post('http://localhost:3000/book', data, { withCredentials: true });
+            SetRedirect(true);
+
+        } catch (error) {
+            if (error.response && error.response.status === 409) {
+                setDateNA(true);  
+            } else {
+                alert("Something went wrong");
+            }
+        }
     }
+
     if(redirect){
         return <Navigate to={'/your-account/bookings/'}/>
     }
@@ -57,6 +75,16 @@ export default function ReservePlaceWidget({place}){
                     <span> for ₹ {numberOfNights*place.price}</span>
                 )}
             </button>
+            {dateNA && (
+                <div>
+                    <h3 className="p-2 text-center text-xl text-red-600"> SOLD OUT for these dates!</h3>
+                </div>
+            )}
+            {error &&(
+                <div>
+                    <h3 className="p-2 text-center text-lg text-red-600"> Incorrect Booking Information Provided!</h3>
+                </div>
+            )}
         </div>
     )
 }
